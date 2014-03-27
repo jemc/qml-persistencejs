@@ -25,7 +25,7 @@ Rectangle {
       'yourdbname',
       'A database description',
       5 * 1024 * 1024
-    );
+    )
     
     ///
     // Create a schema
@@ -34,16 +34,16 @@ Rectangle {
       name: "TEXT",
       description: "TEXT",
       done: "BOOL"
-    });
+    })
     
     var Category = persistence.define('Category', {
       name: "TEXT",
       metaData: "JSON"
-    });
+    })
     
     var Tag = persistence.define('Tag', {
       name: "TEXT"
-    });
+    })
     
     ///
     // Sync the schema to the database
@@ -51,6 +51,41 @@ Rectangle {
     persistence.schemaSync(function(tx) {
       console.log("")
       console.log("Schema was synced.")
-    });
+      console.log("")
+    })
+    
+    ///
+    // Create some objects under the new schema
+    
+    var c = new Category({name: "Main category"})
+    persistence.add(c)
+    for ( var i = 0; i < 5; i++) {
+      var t = new Task()
+      t.name = 'Task ' + i
+      t.done = i % 2 == 0
+      t.category = c
+      persistence.add(t)
+    }
+    
+    ///
+    // Flush the object data to the database
+    
+    persistence.transaction(function(tx) {
+      persistence.flush(tx, function() {
+        console.log("")
+        console.log("Done flushing!")
+        console.log("")
+      })
+    })
+    
+    ///
+    // Dump the data as JSON
+    
+    persistence.transaction(function(tx) {
+      persistence.dump(tx, [Task, Category], function(dump) {
+        console.log(JSON.stringify(dump, null, '  '))
+      })
+    })
+    
   }
 }
