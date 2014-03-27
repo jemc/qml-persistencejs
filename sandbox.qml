@@ -55,7 +55,16 @@ Rectangle {
     })
     
     ///
-    // Create some objects under the new schema
+    // Destroy all records under the schema - so that new objects will be alone
+    
+    persistence.transaction(function(tx) {
+      Task    .all().destroyAll(tx)
+      Category.all().destroyAll(tx)
+      Tag     .all().destroyAll(tx)
+    })
+    
+    ///
+    // Create some new objects under the schema
     
     var c = new Category({name: "Main category"})
     persistence.add(c)
@@ -68,7 +77,7 @@ Rectangle {
     }
     
     ///
-    // Flush the object data to the database
+    // Flush the changes to the database
     
     persistence.transaction(function(tx) {
       persistence.flush(tx, function() {
