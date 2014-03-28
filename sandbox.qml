@@ -1,7 +1,7 @@
 
 import QtQuick 2.1
 
-import "./qml-persistence.js" 1.0 as Persistence
+import "qml"
 
 
 Rectangle {
