@@ -1,6 +1,5 @@
 
 import QtQuick 2.1
-import QtQuick.LocalStorage 2.0
 
 import "./qml-persistence.js" 1.0 as Persistence
 
@@ -10,7 +9,7 @@ Rectangle {
   height: 400
   color: "black"
   
-  property var persistence: Persistence.createDB(LocalStorage)
+  property var persistence: Persistence.js
   
   Component.onCompleted: {
     ///
