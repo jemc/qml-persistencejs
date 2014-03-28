@@ -8,10 +8,12 @@ end
 task :vendor do
   vendor_dir = File.join(File.dirname(__FILE__), 'qml/vendor')
   vendor_source = "https://raw.github.com/zefhemel/persistencejs/master/lib/"
-  vendor_gets = [
-    "persistence.js",
-    "persistence.store.sql.js",
-    "persistence.store.websql.js",
+  vendor_gets = %w[
+    persistence.js
+    persistence.store.sql.js
+    persistence.store.websql.js
+    persistence.sync.js
+    persistence.sync.server.js
   ]
   
   Dir.mkdir vendor_dir unless Dir.exists? vendor_dir
