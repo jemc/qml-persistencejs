@@ -13,12 +13,12 @@ var openDatabaseSync = QQLS.LocalStorage.openDatabaseSync
 ///
 // Import and initialize
 
-Qt.include('persistence.js');
+Qt.include('vendor/persistence.js');
 
 initPersistence(persistence);
 
-Qt.include('persistence.store.sql.js');
-Qt.include('persistence.store.websql.js');
+Qt.include('vendor/persistence.store.sql.js');
+Qt.include('vendor/persistence.store.websql.js');
 
 ///
 // This property holds the toplevel persistence object 
