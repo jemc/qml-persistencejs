@@ -11,6 +11,8 @@ Rectangle {
   
   property var persistence: Persistence.js
   
+  MouseArea { anchors.fill: parent; onClicked: Qt.quit() }
+  
   Component.onCompleted: {
     ///
     // Example code from persistence.js README
